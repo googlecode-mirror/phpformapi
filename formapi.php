@@ -24,7 +24,6 @@
 			if ($val["required"]) $req = " (required)";
 			else $req = "";
 			
-			print "<br>"; // for layout
 			switch ($key) {
 				case "title":
 					print "<h2>$val</h2>";
@@ -32,7 +31,7 @@
 				case "textfield":
 					if (!$val["id"]) $val["id"] = formapi_getuniqueid(); // if id is not defined.
 					
-					print '<label for="' . $val["id"] . '">' . $val["label"] . '</label> <input type="text" name="' . $val["id"] . '" id="' . $val["id"] . '">' . $req;
+					print '<br><label for="' . $val["id"] . '">' . $val["label"] . '</label> <input type="text" name="' . $val["id"] . '" id="' . $val["id"] . '">' . $req;
 					break;
 				case "checkbox":
 					if (!$val["id"]) $val["id"] = formapi_getuniqueid(); // if id is not defined.
@@ -60,7 +59,7 @@ EOF;
 					{
 						if ($key2["selected"] == TRUE) $selected = " selected";
 						else $selected = "";
-						print "<label><input type='radio' name='" . $val["id"] . "' value='$val2' $selected>$key2</label><br>";
+						print "<br><label><input type='radio' name='" . $val["id"] . "' value='$val2' $selected>$key2</label><br>";
 					}
 					
 				case "fieldset":
@@ -70,10 +69,10 @@ EOF;
 					print "</fieldset>";
 					break;
 				case "submitbutton":
-					print '<input type="submit" name="submit" value="' . $val["label"] . '">';
+					print '<br><input type="submit" name="submit" value="' . $val["label"] . '">';
 					break;
 				default:
-					echo "[unknown formfield type.]";
+					echo "<br>[unknown formfield type.]";
 					break;
 				}
 		}

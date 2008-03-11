@@ -13,7 +13,7 @@
 		$formdefinition  = $parser->load(${'formapi_define_' . $formid}); // get YAML formatted variable and turn into PHP array.
 		
 		// Start de form
-		print "<form method='post' action='formapi_submit.php'>";
+		print "<form method='post' action='test_receiveform.php'>";
 		print "<input type='hidden' name='formid' value='" . $formid . "'>";
 		
 		// loop tru array

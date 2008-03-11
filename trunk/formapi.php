@@ -3,7 +3,7 @@
 	/**
 	* Print out the form that is defined by $formid
 	*/
-	function formapi_print($formid)
+	function formapi_print($formid, $submit = "")
 	{
 		global ${'formapi_define_' . $formid}; // make the definition a global variable
 		
@@ -12,8 +12,11 @@
 		$parser = new Spyc;
 		$formdefinition  = $parser->load(${'formapi_define_' . $formid}); // get YAML formatted variable and turn into PHP array.
 		
+		
+		print_r($formdefinition); // for debugging...
+		
 		// Start de form
-		$output .= "<form method='post' action='test_receiveform.php'>";
+		$output .= "<form method='post' action='$submit'>";
 		$output .= "<input type='hidden' name='formid' value='" . $formid . "'>";
 		
 		// loop tru array
@@ -25,8 +28,11 @@
 			else $req = "";
 			
 			switch ($key) {
-				case "title":
+				case "h2":
 					$output .= "<h2>$val</h2>";
+					break;
+				case "p":
+					$output .= "<p>$val</p>";
 					break;
 				case "textfield":
 					if (!$val["id"]) $val["id"] = formapi_getuniqueid(); // if id is not defined.

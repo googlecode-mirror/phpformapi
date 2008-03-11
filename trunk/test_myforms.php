@@ -2,11 +2,15 @@
 // 1. Define a form (use YAML markup http://www.yaml.org)
 // Use the correct variable name: "mytestform" is the form id.
 $formapi_define_mytestform = "
-title: My test form
+h2: My test form
+p: What a great form this is!
 fieldset:
   label: it's a fieldset
 textfield: 
   label: it's a textfield!
+  required: TRUE
+textfield: 
+  label: it's a second textfield!
   required: TRUE
 fieldsetclose:
 checkbox: 
@@ -20,7 +24,7 @@ dropdown:
     First item: a
     Second item: b
     Third item: c
---- this is an inline comment that won't show up in the form.
+# throwaway comment
 textarea:
   label: Type in some text:
   cols: 40

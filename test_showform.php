@@ -14,7 +14,7 @@
 include_once("formapi.php");
 include_once("test_myforms.php");
 
-print formapi_print("mytestform");
+print formapi_print("mytestform", "test_receiveform.php"); // ($formid, $submitpath)
 
 ?>
 </p>

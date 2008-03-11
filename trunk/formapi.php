@@ -13,8 +13,8 @@
 		$formdefinition  = $parser->load(${'formapi_define_' . $formid}); // get YAML formatted variable and turn into PHP array.
 		
 		// Start de form
-		print "<form method='post' action='test_receiveform.php'>";
-		print "<input type='hidden' name='formid' value='" . $formid . "'>";
+		$output .= "<form method='post' action='test_receiveform.php'>";
+		$output .= "<input type='hidden' name='formid' value='" . $formid . "'>";
 		
 		// loop tru array
 		while (list($key, $val) = each($formdefinition)) 
@@ -26,16 +26,16 @@
 			
 			switch ($key) {
 				case "title":
-					print "<h2>$val</h2>";
+					$output .= "<h2>$val</h2>";
 					break;
 				case "textfield":
 					if (!$val["id"]) $val["id"] = formapi_getuniqueid(); // if id is not defined.
 					
-					print '<br><label for="' . $val["id"] . '">' . $val["label"] . '</label> <input type="text" name="' . $val["id"] . '" id="' . $val["id"] . '">' . $req;
+					$output .= '<br><label for="' . $val["id"] . '">' . $val["label"] . '</label> <input type="text" name="' . $val["id"] . '" id="' . $val["id"] . '">' . $req;
 					break;
 				case "checkbox":
 					if (!$val["id"]) $val["id"] = formapi_getuniqueid(); // if id is not defined.
-					print '<br><input type="checkbox" name="' . $val["id"] . '" value="checkbox" id="' . $val["id"] . '"> <label for="' . $val["id"] . '">' . $val["label"] . '</label>' . $req;
+					$output .= '<br><input type="checkbox" name="' . $val["id"] . '" value="checkbox" id="' . $val["id"] . '"> <label for="' . $val["id"] . '">' . $val["label"] . '</label>' . $req;
 					break;
 				case "dropdown":
 					// loop tru values
@@ -44,7 +44,7 @@
 						$options .= "<option value='" . $val2 . "'>" . $key2 . "</option>";
 					}
 					
-					print <<<EOF
+					$output .= <<<EOF
 <p>
 <label for="select">{$val["label"]}</label>
   <select name="select" id="select">
@@ -55,43 +55,44 @@ EOF;
 					break;	
 				
 				case "hidden" :
-					print <<<EOF
+					$output .= <<<EOF
 <input name="{$val["name"]}" type="hidden" value="{$val["value"]}">
 EOF;
 					break;
 				case "textarea" :
 					
-					print <<<EOF
+					$output .= <<<EOF
 <label for="textarea">{$val["label"]}<br></label>
 <textarea name="textarea" cols="{$val["cols"]}" rows="{$val["rows"]}" id="textarea"></textarea> 
 EOF;
 					break;
 				case "radiogroup":
-					if ($val["title"]) print "<h4>" . $val["title"] . "</h4>";
+					if ($val["title"]) $output .= "<h4>" . $val["title"] . "</h4>";
 					
 					while (list ($key2, $val2) = each($val["values"]))
 					{
 						if ($key2["selected"] == TRUE) $selected = " selected";
 						else $selected = "";
-						print "<br><label><input type='radio' name='" . $val["id"] . "' value='$val2' $selected>$key2</label>";
+						$output .= "<br><label><input type='radio' name='" . $val["id"] . "' value='$val2' $selected>$key2</label>";
 					}
 					
 				case "fieldset":
-					print "<fieldset><legend>" . $val["label"] . "</legend>";
+					$output .= "<fieldset><legend>" . $val["label"] . "</legend>";
 					break;
 				case "fieldsetclose":
-					print "</fieldset>";
+					$output .= "</fieldset>";
 					break;
 				case "submitbutton":
-					print '<br><input type="submit" name="submit" value="' . $val["label"] . '">';
+					$output .= '<br><input type="submit" name="submit" value="' . $val["label"] . '">';
 					break;
 				default:
-					echo "<br>[unknown formfield type.]";
+					$output .= "<br>[unknown formfield type.]";
 					break;
 				}
 		}
 		
-		print "</form>";
+		$output .= "</form>";
+		return $output;
 	}
 	
 	/**

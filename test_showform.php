@@ -7,9 +7,16 @@
 </head>
 
 <body>
-<p>Go to <a href="test_showform.php">test_showform.php </a></p>
+<h1>Form API</h1>
+<p>Here is a form. It is created automatically.</p>
 <p>
+<? 
+include_once("formapi.php");
+include_once("myforms.php");
 
+formapi_print("mytestform");
+
+?>
 </p>
 <p>&nbsp;</p>
 </body>

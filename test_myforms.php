@@ -11,6 +11,9 @@ textfield:
 fieldsetclose:
 checkbox: 
   label: my checkboxing
+hidden:
+  name: myhiddenfield
+  value: somevalue
 dropdown:
   label: my first dropdown
   values:
@@ -18,6 +21,10 @@ dropdown:
     Second item: b
     Third item: c
 --- this is an inline comment that won't show up in the form.
+textarea:
+  label: Type in some text:
+  cols: 40
+  rows: 8
 radiogroup:
   id: radiogroup1
   title: Make a choice:

@@ -45,13 +45,27 @@
 					}
 					
 					print <<<EOF
+<p>
 <label for="select">{$val["label"]}</label>
   <select name="select" id="select">
     $options
   </select>
+</p>
 EOF;
 					break;	
 				
+				case "hidden" :
+					print <<<EOF
+<input name="{$val["name"]}" type="hidden" value="{$val["value"]}">
+EOF;
+					break;
+				case "textarea" :
+					
+					print <<<EOF
+<label for="textarea">{$val["label"]}<br></label>
+<textarea name="textarea" cols="{$val["cols"]}" rows="{$val["rows"]}" id="textarea"></textarea> 
+EOF;
+					break;
 				case "radiogroup":
 					if ($val["title"]) print "<h4>" . $val["title"] . "</h4>";
 					
@@ -59,7 +73,7 @@ EOF;
 					{
 						if ($key2["selected"] == TRUE) $selected = " selected";
 						else $selected = "";
-						print "<br><label><input type='radio' name='" . $val["id"] . "' value='$val2' $selected>$key2</label><br>";
+						print "<br><label><input type='radio' name='" . $val["id"] . "' value='$val2' $selected>$key2</label>";
 					}
 					
 				case "fieldset":

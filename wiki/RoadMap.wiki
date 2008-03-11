@@ -1,8 +1,5 @@
 #summary Plans and ideas
 
-Design goals:
-  * Be standalone and not too heavy, so the library can easily be incorporated into other projects. Things like themeing and such are probably too platform-specific to implement.
-  * Be focused: do forms well, but don't do other stuff.
 
 We're at version 0.1 now, to get to 1.0 we need a stable version.
 

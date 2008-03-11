@@ -12,7 +12,7 @@
 <p>
 <? 
 include_once("formapi.php");
-include_once("myforms.php");
+include_once("test_myforms.php");
 
 formapi_print("mytestform");
 
